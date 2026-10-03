@@ -1,0 +1,35 @@
+{
+  "name": "scalp-radar",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ScalpRadar Pro — сканер краткосрочных (скальпинг) сделок по криптовалютам с оценкой риска и ИИ-анализом",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,web -c cyan,magenta \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm --workspace server run dev",
+    "dev:web": "npm --workspace web run dev",
+    "build": "npm --workspace web run build",
+    "start": "npm --workspace server run start",
+    "backtest": "npm --workspace server run backtest --",
+    "calibrate": "npm --workspace server run calibrate --",
+    "regimes": "npm --workspace server run regimes --",
+    "apk": "npm run build && npx cap sync android && cd android && gradlew.bat assembleDebug",
+    "apk:open": "npx cap open android",
+    "share": "concurrently -n server,tunnel -c cyan,magenta \"npm:start\" \"tools\\cloudflared.exe tunnel --url http://localhost:8787 --no-autoupdate\"",
+    "exits": "npm --workspace server run exits --",
+    "validate": "npm --workspace server run validate --"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.0",
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/core": "^8.5.0",
+    "@capacitor/local-notifications": "^8.3.1"
+  }
+}

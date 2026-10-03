@@ -1,0 +1,12 @@
+{
+  "appId": "com.scalpradar.app",
+  "appName": "ScalpRadar",
+  "webDir": "web/dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

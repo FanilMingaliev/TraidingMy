@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink-950: #05070c;
+  --color-ink-900: #080b13;
+  --color-ink-850: #0b0f1a;
+  --color-ink-800: #101623;
+  --color-ink-700: #1a2333;
+  --color-ink-600: #26324a;
+  --color-mint-400: #35f0b0;
+  --color-mint-500: #00e5a0;
+  --color-mint-600: #00b47e;
+  --color-rose-signal: #ff4d6d;
+  --color-amber-signal: #ffb347;
+  --color-violet-signal: #8b7cff;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-color: var(--color-ink-950);
+    color: #e8edf7;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(1100px 600px at 12% -8%, rgba(0, 229, 160, 0.13), transparent 60%),
+      radial-gradient(900px 520px at 92% 4%, rgba(139, 124, 255, 0.13), transparent 62%),
+      radial-gradient(760px 480px at 50% 108%, rgba(255, 77, 109, 0.08), transparent 65%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: rgba(0, 229, 160, 0.28);
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-700);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-600);
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  .glass {
+    background: linear-gradient(160deg, rgba(20, 27, 42, 0.86), rgba(9, 12, 20, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+      0 24px 60px -32px rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(14px);
+  }
+
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .glow-mint {
+    box-shadow: 0 0 0 1px rgba(0, 229, 160, 0.35), 0 12px 40px -12px rgba(0, 229, 160, 0.55);
+  }
+
+  .glow-rose {
+    box-shadow: 0 0 0 1px rgba(255, 77, 109, 0.35), 0 12px 40px -12px rgba(255, 77, 109, 0.5);
+  }
+}
+
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-radar {
+  animation: radar-sweep 2.6s linear infinite;
+}
+
+.animate-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+.animate-rise {
+  animation: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  animation: shimmer 1.6s infinite;
+}
